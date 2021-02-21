@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>List of all clients</title>
+    <title th:text="#{page.head.list_of_all_clients}">List of all clients</title>
 
     <script>
         function getClient(url, valueControlName) {
@@ -67,7 +67,7 @@
     </style>
 </head>
 <body>
-    <h3>Клиенты:</h3>
+    <h3 th:text="#{page.title.clients}">Clients:</h3>
 
     <table class="clients">
         <thead>

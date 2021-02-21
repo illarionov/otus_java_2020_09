@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.*;
@@ -15,6 +16,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Locale;
 
 @Configuration
 @ComponentScan
@@ -55,6 +57,17 @@ public class WebConfig implements WebMvcConfigurer {
         return viewResolver;
     }
 
+    @Bean
+    public ResourceBundleMessageSource messageSource() {
+        var source = new ResourceBundleMessageSource();
+        source.setBasenames("messages");
+        source.setUseCodeAsDefaultMessage(false);
+        source.setFallbackToSystemLocale(false);
+        source.setDefaultLocale(Locale.US);
+        source.setDefaultEncoding("UTF-8");
+        return source;
+    }
+    
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/no-handler-view").setViewName("noHandlerView");
